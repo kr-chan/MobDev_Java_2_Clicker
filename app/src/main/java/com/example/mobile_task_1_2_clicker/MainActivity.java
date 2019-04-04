@@ -11,6 +11,55 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mainText;
     Button mainBtn;
+    TextView mainTextView;
+    Button mainButton;
+    mainButton = findViewById(R.id.main_button);
+    mainButton.setOnClickListener(this);
+
+    EditText mainEditText;
+    mainEditText = (EditText) findViewById(R.id.main_edittext);
+
+    public void onClick(View v) { mainTextView.setText(mainEditText.getText().toString()
+            + &quot; is learning Android development!&quot;);
+    }
+
+    ListView mainListView;
+    ArrayAdapter mArrayAdapter;
+    ArrayList mNameList = new ArrayList();
+
+    mNameList.add(mainEditText.getText().toString());
+    mArrayAdapter.notifyDataSetChanged();
+
+    public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+            AdapterView.OnItemClickListener {
+        mainListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mainTextView = findViewById(R.id.main_textview);
+        mainTextView.setText("Set in Java!");
+
+        mainListView = findViewById(R.id.main_listview);
+        mArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                mNameList);
+        mainListView.setAdapter(mArrayAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        mainTextView.setText(&quot;Button pressed!&quot;);
+    }
+
+    @Override
+    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+        Log.d(&quot;omg android&quot;, position + &quot;: &quot; + mNameList.get(position));
+        mainTextView.setText(mNameList.get(position).toString()
+                + &quot; is learning Android development!&quot;);
+    }
 
     private long score = 0;
 
